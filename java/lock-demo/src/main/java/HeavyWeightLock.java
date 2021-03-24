@@ -18,7 +18,12 @@ public class HeavyWeightLock {
         Thread t1 = new Thread(()->{
             synchronized (lockObject) {
                 try {
-                    Thread.sleep(5000);
+                    System.out.println("before wait");
+                    System.out.println(ClassLayout.parseInstance(lockObject).toPrintable());
+
+                    lockObject.wait();
+                    System.out.println("after wait");
+                    System.out.println(ClassLayout.parseInstance(lockObject).toPrintable());
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -29,6 +34,9 @@ public class HeavyWeightLock {
         t1.start();
 
         Thread.sleep(1000);
+        synchronized (lockObject){
+            lockObject.notifyAll();
+        }
         System.out.println("t1 锁之前");
         System.out.println(ClassLayout.parseInstance(lockObject).toPrintable());
         synchronized (lockObject){

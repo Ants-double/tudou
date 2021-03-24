@@ -1,3 +1,5 @@
+import java.util.concurrent.CountDownLatch;
+
 /**
  * @author lyy
  * @Deprecated
@@ -5,4 +7,10 @@
  */
 public class LockObject {
     public  boolean flag=false;
+    int i;
+    public synchronized void parse() {
+        LightWeightLock.countDownLatch.countDown();
+        i++;
+    }
 }
+

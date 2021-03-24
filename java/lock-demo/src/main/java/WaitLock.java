@@ -22,7 +22,6 @@ public class WaitLock {
                     System.out.println(ClassLayout.parseInstance(lockObject).toPrintable());
                     lockObject.wait();
                     System.out.println("wait 之后");
-
                     System.out.println(ClassLayout.parseInstance(lockObject).toPrintable());
 
                 } catch (InterruptedException e) {
